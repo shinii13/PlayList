@@ -1,0 +1,12 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_host: localhost
+    database_port: 3306
+    database_name: user2015719_sergetest
+    database_user: sergetest
+    database_password: sergetest
+    mailer_transport: smtp
+    mailer_host: null
+    mailer_user: null
+    mailer_password: null
+    secret: b353d46c7af31b411a75a18704d7f89b74ce0549

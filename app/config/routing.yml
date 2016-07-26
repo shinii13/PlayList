@@ -1,0 +1,5 @@
+play_list_play:
+    resource: "@PlayListPlayBundle/Resources/config/routing.yml"
+    prefix:   /
+
+

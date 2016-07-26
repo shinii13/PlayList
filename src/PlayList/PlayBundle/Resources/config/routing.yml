@@ -1,0 +1,5 @@
+PlayListPlayBundle_homepage1:
+    path:  /
+    defaults: { _controller: "PlayListPlayBundle:Play:index" }
+    requirements:
+        methods:  GET
