@@ -21,43 +21,25 @@ class PlayController extends Controller
         $sorttype = $request->query->get('sorttype');
 
 
-        If ($author != '')
-        {
-            If ($style != '') {
-                If ($year != '')
-                    $filter = array('author' => $author, 'style' => $style, 'year' => $year);
-                else
-                    $filter = array('author' => $author, 'style' => $style);
-            }
-            else if ($year != '')
-                $filter= array('author'=>$author, 'year'=>$year);
-            else
-                $filter= array('author'=>$author);
-
-        }
-        else
-        {
-            If ($style != '') {
-                If ($year != '')
-                    $filter = array('style' => $style, 'year' => $year);
-                else
-                    $filter = array('style' => $style);
-            }
-            else if ($year != '')
-                $filter= array('year'=>$year);
-            else
-                $filter= array();
-        }
-
-
-
 
         $em = $this->getDoctrine()->getManager();
+        $query = $em->createQuery(
+            'SELECT p
+                FROM PlayListPlayBundle:PlayList p
+                where p.year like :yearSearch AND 
+                      p.author like :author AND 
+                      p.style like :style
+                ORDER BY p.' . $sortiterm . ' ' . $sorttype
+        );
+        $query->setParameters(array(
+            'yearSearch' => '%' . $year . '%',
+            'author' => '%' . $author . '%',
+            'style' => '%' . $style . '%',
 
-        $blog = $em->getRepository('PlayListPlayBundle:PlayList')->findBy($filter,array($sortiterm => $sorttype));
 
+        ));
 
-
+        $blog = $query->getResult();
 
         $response = new Response();
         for($i=($page-1)*$volume; ($i < count($blog) && $i<$page*$volume+1) ; $i++)
